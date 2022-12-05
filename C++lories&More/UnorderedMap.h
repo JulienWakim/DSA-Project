@@ -1,0 +1,11 @@
+
+#ifndef C__LORIES_MORE_UNORDEREDMAP_H
+#define C__LORIES_MORE_UNORDEREDMAP_H
+
+
+class UnorderedMap {
+
+};
+
+
+#endif //C__LORIES_MORE_UNORDEREDMAP_H
