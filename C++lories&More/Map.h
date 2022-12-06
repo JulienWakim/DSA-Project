@@ -17,25 +17,24 @@ using namespace std;
 
 
 class Map {
-public : struct Node{
-    public:
+public :
+    struct Node{
         Node *left;
         Node *right;
         string description;
-        double calories;
+        int calories;
     };
 private:
     int size;
     Node* root;
-
+    Node* newMapElement(string key, int value);
+    void insertKeyValueHelper(Node* current,Node* element);
+    double findHelper(string key, Node* current);
 public:
     Map();
     Map(string key, int value);
-    void insert(string key, int value);
-    Node* newMapElement(string key, int value);
-    void insertKeyValueHelper(Node* current,Node* element);
-    double findValue(string key);
-    double findHelper(string key, Node* current);
+    void insertKeyValue(string key, int value);
+    double &operator[](string key);
     bool isEmpty();
 };
 
