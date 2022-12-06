@@ -50,8 +50,11 @@ int main() {
     double height = 65;
     int age = 20;
     bool lose = true;
-    double maxCalories;
 
+    double maxCalories;
+    double bfastCals;
+    double lunchCals;
+    double dinnerCals;
 
     cout << "--------------C++lories&More--------------\n";
     cout << "\t\t~Meal Prepping Made Easy~\n\n";
@@ -170,13 +173,17 @@ int main() {
                         else{
                             maxCalories+= 350;
                         }
-                        
+                        bfastCals = maxCalories * .2;
+                        lunchCals = maxCalories * .4;
+                        dinnerCals = maxCalories * .4;
+
                     }
                     else{
                         cout << "\n";
                     }
+                    prepped = true;
                 }
-                prepped = true;
+
                 break;
             case 5:
                 prepped = true;
