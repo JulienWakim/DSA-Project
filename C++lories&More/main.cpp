@@ -74,7 +74,15 @@ int main() {
     {"Simple salmon quinoa", "Quinoa, uncooked", "Fish, salmon, coho (silver), raw (Alaska Native)", "Tomatoes, red, ripe, cooked, with salt"},
     {"Mini Healthy Pizza", "Cheese, ricotta, whole milk", "English muffins, plain, enriched, with ca prop (includes sourdough)", "Tomatoes, red, ripe, cooked, with salt"}};
 
-    vector<vector<string>> dinnerMeals = {{},{}};
+    vector<vector<string>> dinnerMeals = {{"Chicken and Veggies", "Vegetables, mixed (corn, lima beans, peas, green beans, carrots) canned, no salt added", "Tomatoes, red, ripe, cooked, with salt", "Chicken, broilers or fryers, thigh, meat and skin, raw"},
+    {"Pasta with Parmesan", "Sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "Cheese, parmesan, grated"},
+    {"Spaghetti Carbonara", "Sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "Cheese, parmesan, grated", "Eggs, scrambled, frozen mixture"},
+    {"Chicken and Fruit Salad", "Chicken breast tenders, breaded, cooked, microwaved", "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, water pack, solids and liquids"},
+    {"Colorful Pasta Salad", "Arugula, raw", "Pasta, fresh-refrigerated, plain, cooked", "PREGO Pasta, Heart Smart- Roasted Red Pepper and Garlic Italian Sauce, ready-to-serve"},
+    {"Balsamic Glazed Salmon", "Fish, salmon, coho (silver), raw (Alaska Native)", "Vinegar, balsamic"},
+    {"Marinara Chicken Pasta", "Chicken breast tenders, breaded, cooked, microwaved", "Sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium"},
+    {"Breakfast for Dinner", "Pork, cured, bacon, cooked, microwaved", "Eggs, scrambled, frozen mixture", "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat"}};
+    
     //Initializing health factors for default meal prep
     int activityLevel = 3;
     bool male;
