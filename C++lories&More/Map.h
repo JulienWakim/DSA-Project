@@ -17,8 +17,8 @@ using namespace std;
 
 
 class Map {
-public : struct Node{
-    public:
+public :
+    struct Node{
         Node *left;
         Node *right;
         string description;
@@ -27,15 +27,14 @@ public : struct Node{
 private:
     int size;
     Node* root;
-
+    Node* newMapElement(string key, int value);
+    void insertKeyValueHelper(Node* current,Node* element);
+    double findHelper(string key, Node* current);
 public:
     Map();
     Map(string key, int value);
     void insertKeyValue(string key, int value);
-    Node* newMapElement(string key, int value);
-    void insertKeyValueHelper(Node* current,Node* element);
     double &operator[](string key);
-    double findHelper(string key, Node* current);
     bool isEmpty();
 };
 
