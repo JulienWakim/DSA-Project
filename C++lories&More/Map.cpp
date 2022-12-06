@@ -20,6 +20,13 @@ Map::Map() {
 
 void Map::insertKeyValue(string key, int value) {
     Node* element = newMapElement(key,value);
+    if (root == nullptr){
+        root ->description = key;
+        root -> calories = value;
+        root ->left = nullptr;
+        root ->right = nullptr;
+        size++;
+    }
     Node* current = root;
 
     if (element -> description > current -> description){

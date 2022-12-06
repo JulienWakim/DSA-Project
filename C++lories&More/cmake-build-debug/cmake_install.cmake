@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/csesc_snhoakq/Documents/GitHub/DSA-Project/C++lories&More
+# Install script for directory: C:/Users/csesc_snhoakq/CLionProjects/DSAProject3/DSA-Project/C++lories&More
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/csesc_snhoakq/Documents/GitHub/DSA-Project/C++lories&More/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/csesc_snhoakq/CLionProjects/DSAProject3/DSA-Project/C++lories&More/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

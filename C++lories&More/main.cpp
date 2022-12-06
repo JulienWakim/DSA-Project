@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <map> //FOR TESTING
+#include "Map.h"
 #include "UnorderedMap.h"
 using namespace std;
 
@@ -19,6 +20,7 @@ int main() {
 
     map<string, double> test; //FOR TESTING PURPOSES
     UnorderedMap unordered;
+    Map ordered;
 
     //ADDS FOOD DESCRIPTION AND CALORIE INTO MAPS
     while (getline(myfile, line)) {
@@ -35,7 +37,12 @@ int main() {
         double cal = stod(calories);
         test[description] = cal;
         unordered.insert(description, cal);
+        ordered.insertKeyValue(description,cal);
     }
+
+    cout << ordered["Cheese, cottage, lowfat, 1% milkfat"] << endl;
+    cout << ordered["Cheese, cottage, lowfat, 1% milkfat"] << endl;
+
 
     bool prepped = false;
     bool restrict = false;
