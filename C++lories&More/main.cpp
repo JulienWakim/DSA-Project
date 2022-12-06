@@ -46,6 +46,8 @@ int main() {
     bool activity = false;
     bool healthInfo = false;
     vector<string> dietaryRestrict;
+
+    //Each meal name as the head of each inner vector for breakfast meals
     vector<vector<string>> breakfastMeals = {{"Cloud Eggs", "eggs, scrambled, frozen mixture", "basil, fresh", "tomatoes, red, ripe, cooked, with salt"},
     {"Ham and Swiss Omelet", "cheese, swiss", "oscar mayer, ham (water added, baked cooked 96% fat free)", "eggs, scrambled, frozen mixture", "butter, salted"},
     {"Fruity Waffle Parfait", "kellogg's, eggo, nutri-grain, waffles, low fat", "nuts, almond butter, plain, without salt added", "yogurt, fruit variety, nonfat, fortified with vitamin d", "syrup, maple, canadian"},
@@ -54,10 +56,10 @@ int main() {
     {"Yogurt Fruit Cup", "tangerines, (mandarin oranges), raw", "nuts, almond butter, plain, without salt added", "yogurt, fruit variety, nonfat, fortified with vitamin d"},
     {"Sausage Omelet", "eggs, scrambled, frozen mixture", "sausage, italian, pork, raw", "dip, tostitos, salsa con queso, medium"},
     {"Sausage Hash-browns", "sausage, italian, pork, raw", "potatoes, canned, drained solids, no salt added", "cheese, pasteurized process, cheddar or american, low sodium"},
-    {"Pepper, Tomato & Ham Omelette", "eggs, scrambled, frozen mixture", "oscar mayer, ham (water added, baked cooked 96% fat free)", "tomatoes, red, ripe, cooked, with salt"}
-    ,{"Egg, Bacon, and Potatoes Plate", "eggs, scrambled, frozen mixture", "turkey bacon, unprepared", "potatoes, canned, drained solids, no salt added"}};
+    {"Pepper, Tomato & Ham Omelette", "eggs, scrambled, frozen mixture", "oscar mayer, ham (water added, baked cooked 96% fat free)", "tomatoes, red, ripe, cooked, with salt"},
+    {"Egg, Bacon, and Potatoes Plate", "eggs, scrambled, frozen mixture", "turkey bacon, unprepared", "potatoes, canned, drained solids, no salt added"}};
 
-
+    //Each meal name as the head of each inner vector for lunch meals
     vector<vector<string>> lunchMeals = {{"McDonald's McChicken", "mcdonald's, mcchicken sandwich", "mcdonald's, sweet 'n sour sauce"},
     {"McDonald's Chicken Nuggets", "mcdonald's, chicken mcnuggets", "mcdonald's, barbeque sauce"},
     {"Quick Lunch Meal", "campbell's chunky microwavable bowls, old fashioned vegetable beef soup, ready-to-serve"},
@@ -67,6 +69,7 @@ int main() {
     {"Simple salmon quinoa", "quinoa, uncooked", "fish, salmon, coho (silver), raw (alaska Native)", "tomatoes, red, ripe, cooked, with salt"},
     {"Mini Healthy Pizza", "cheese, ricotta, whole milk", "english muffins, plain, enriched, with ca prop (includes sourdough)", "tomatoes, red, ripe, cooked, with salt"}};
 
+    //Each meal name as the head of each inner vector for dinner meals
     vector<vector<string>> dinnerMeals = {{"Chicken and Veggies", "vegetables, mixed (corn, lima beans, peas, green beans, carrots) canned, no salt added", "tomatoes, red, ripe, cooked, with salt", "chicken, broilers or fryers, thigh, meat and skin, raw"},
     {"Pasta with Parmesan", "sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "cheese, parmesan, grated"},
     {"Spaghetti Carbonara", "sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "cheese, parmesan, grated", "eggs, scrambled, frozen mixture"},
@@ -77,7 +80,7 @@ int main() {
     {"Breakfast for Dinner", "pork, cured, bacon, cooked, microwaved", "eggs, scrambled, frozen mixture", "kellogg's, eggOo, nutri-grain, waffles, low fat"}
     };
 
-    
+
     //Initializing health factors for default meal prep
     int activityLevel = 3;
     bool male;
@@ -86,6 +89,7 @@ int main() {
     int age = 20;
     bool lose = true;
 
+    //Setting place holder variables for calorie counts
     double maxCalories;
     double bfastCals;
     double lunchCals;
@@ -336,4 +340,3 @@ double curatePlanUnordered(double maxCals, vector<string>& restrictions, vector<
     }
     return calories;
 }
-
