@@ -46,14 +46,17 @@ int main() {
     bool activity = false;
     bool healthInfo = false;
     vector<string> dietaryRestrict;
-    vector<vector<string>> breakfastMeals = {{"Cloud Eggs", "eggs, scrambled, frozen mixture", "cheese, parmesan, grated", "basil, fresh", "tomatoes, red, ripe, cooked, with salt"},
+    vector<vector<string>> breakfastMeals = {{"Cloud Eggs", "eggs, scrambled, frozen mixture", "basil, fresh", "tomatoes, red, ripe, cooked, with salt"},
     {"Ham and Swiss Omelet", "cheese, swiss", "oscar mayer, ham (water added, baked cooked 96% fat free)", "eggs, scrambled, frozen mixture", "butter, salted"},
-    {"Fruity Waffle Parfait", "kellogg's, eggo, nutri-grain, waffles, low fat", "nuts, almond butter, plain, without salt added", "yogurt, fruit variety, nonfat, fortified with vitamin d", "snacks, banana chips", "syrup, maple, canadian"},
+    {"Fruity Waffle Parfait", "kellogg's, eggo, nutri-grain, waffles, low fat", "nuts, almond butter, plain, without salt added", "yogurt, fruit variety, nonfat, fortified with vitamin d", "syrup, maple, canadian"},
     {"Waffle Egg Sandwich", "eggs, scrambled, frozen mixture", "kellogg's, eggo, nutri-grain, waffles, low fat", "canadian bacon, unprepared", "cheese, parmesan, grated", "syrup, maple, canadian"},
     {"Applesauce Pancakes", "pancakes, plain, dry mix, complete (includes buttermilk)", "babyfood, fruit, applesauce, strained", "syrup, maple, canadian"},
     {"Yogurt Fruit Cup", "tangerines, (mandarin oranges), raw", "nuts, almond butter, plain, without salt added", "yogurt, fruit variety, nonfat, fortified with vitamin d"},
     {"Sausage Omelet", "eggs, scrambled, frozen mixture", "sausage, italian, pork, raw", "dip, tostitos, salsa con queso, medium"},
-    {"Sausage Hash-browns", "oil, corn and canola", "sausage, italian, pork, raw", "potatoes, canned, drained solids, no salt added", "cheese, pasteurized process, cheddar or american, low sodium"} };
+    {"Sausage Hash-browns", "sausage, italian, pork, raw", "potatoes, canned, drained solids, no salt added", "cheese, pasteurized process, cheddar or american, low sodium"},
+    {"Pepper, Tomato & Ham Omelette", "eggs, scrambled, frozen mixture", "oscar mayer, ham (water added, baked cooked 96% fat free)", "tomatoes, red, ripe, cooked, with salt"}
+    ,{"Egg, Bacon, and Potatoes Plate", "eggs, scrambled, frozen mixture", "turkey bacon, unprepared", "potatoes, canned, drained solids, no salt added"}};
+
 
     vector<vector<string>> lunchMeals = {{"McDonald's McChicken", "mcdonald's, mcchicken sandwich", "mcdonald's, sweet 'n sour sauce"},
     {"McDonald's Chicken Nuggets", "mcdonald's, chicken mcnuggets", "mcdonald's, barbeque sauce"},
@@ -71,7 +74,9 @@ int main() {
     {"Colorful Pasta Salad", "arugula, raw", "pasta, fresh-refrigerated, plain, cooked", "prego pasta, heart smart- roasted red pepper and garlic italian sauce, ready-to-serve"},
     {"Balsamic Glazed Salmon", "fish, salmon, coho (silver), raw (alaska native)", "vinegar, balsamic"},
     {"Marinara Chicken Pasta", "chicken breast tenders, breaded, cooked, microwaved", "sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium"},
-    {"Breakfast for Dinner", "pork, cured, bacon, cooked, microwaved", "eggs, scrambled, frozen mixture", "kellogg's, eggOo, nutri-grain, waffles, low fat"}};
+    {"Breakfast for Dinner", "pork, cured, bacon, cooked, microwaved", "eggs, scrambled, frozen mixture", "kellogg's, eggOo, nutri-grain, waffles, low fat"}
+    };
+
     
     //Initializing health factors for default meal prep
     int activityLevel = 3;
