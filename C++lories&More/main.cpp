@@ -50,7 +50,17 @@ int main() {
     bool activity = false;
     bool healthInfo = false;
     vector<string> dietaryRestrict;
+    vector<vector<string>> breakfastMeals = { {"Cloud Eggs", "Eggs, scrambled, frozen mixture", "Cheese, parmesan, grated", "Basil, fresh", "Tomatoes, red, ripe, cooked, with salt"},
+    {"Ham and Swiss Omlet", "Cheese, swiss", "OSCAR MAYER, Ham (water added, baked cooked 96% fat free)", "Eggs, scrambled, frozen mixture", "Butter, salted"},
+    {"Fruity Waffle Parfait", "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat", "Nuts, almond butter, plain, without salt added", "Yogurt, fruit variety, nonfat, fortified with vitamin D", "Snacks, banana chips", "Syrup, maple, Canadian"},
+    {"Waffle Sandwich", "Eggs, scrambled, frozen mixture", "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat", "Canadian bacon, unprepared", "Cheese, parmesan, grated", "Syrup, maple, Canadian"},
+    {"Applesauce Pancakes", "Pancakes, plain, dry mix, complete (includes buttermilk)", "Babyfood, fruit, applesauce, strained", "Syrup, maple, Canadian"},
+    {"Yogurt Fruit Cup", "Tangerines, (mandarin oranges), raw", "Nuts, almond butter, plain, without salt added", "Yogurt, fruit variety, nonfat, fortified with vitamin D"},
+    {"Sausage Omlet", "Eggs, scrambled, frozen mixture", "Sausage, Italian, pork, raw", "Dip, TOSTITOS, salsa con queso, medium"},
+    {"Sausage Hashbrowns", "Oil, corn and canola", "Sausage, Italian, pork, raw", "Potatoes, canned, drained solids, no salt added", "Cheese, pasteurized process, cheddar or American, low sodium"} };
 
+    vector<vector<string>> lunchMeals = {{},{}};
+    vector<vector<string>> dinnerMeals = {{},{}};
     //Initializing health factors for default meal prep
     int activityLevel = 3;
     bool male;
