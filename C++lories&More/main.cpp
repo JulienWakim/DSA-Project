@@ -40,7 +40,7 @@ int main() {
         ordered.insert(description,cal);
 
     }
-
+    //Placeholder variables for keeping track of restrictions
     bool prepped = false;
     bool restrict = false;
     bool activity = false;
@@ -77,8 +77,7 @@ int main() {
     {"Colorful Pasta Salad", "arugula, raw", "pasta, fresh-refrigerated, plain, cooked", "prego pasta, heart smart- roasted red pepper and garlic italian sauce, ready-to-serve"},
     {"Balsamic Glazed Salmon", "fish, salmon, coho (silver), raw (alaska native)", "vinegar, balsamic"},
     {"Marinara Chicken Pasta", "chicken breast tenders, breaded, cooked, microwaved", "sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium"},
-    {"Breakfast for Dinner", "pork, cured, bacon, cooked, microwaved", "eggs, scrambled, frozen mixture", "kellogg's, eggOo, nutri-grain, waffles, low fat"}
-    };
+    {"Breakfast for Dinner", "pork, cured, bacon, cooked, microwaved", "eggs, scrambled, frozen mixture", "kellogg's, eggOo, nutri-grain, waffles, low fat"}};
 
 
     //Initializing health factors for default meal prep
@@ -111,12 +110,14 @@ int main() {
         switch(option) {
             case 1:
                 cout << "\n\t\t~Dietary Restrictions~\n";
+                //If restrictions are already set it allows for changing them or leaving them as is
                 if (restrict) {
                     cout << "Dietary restrictions already entered!\nDo you want to change the information? (Y/N)\n";
                     cin >> input;
                 } else {
                     input = "Y";
                 }
+                //Setting dietary restrictions
                 if (input == "Y") {
                     dietaryRestrict.clear();
                     cout << "Do you have any dietary restrictions? (Y/N)\n";
@@ -137,6 +138,7 @@ int main() {
                 break;
             case 2:
                 cout << "\n\t\t~Activity Level~\n";
+                //If activity level is already set it allows for changing them or leaving them as is
                 if (activity) {
                     cout << "Activity level already entered!\nDo you want to change the information? (Y/N)\n";
                     cin >> input;
@@ -154,6 +156,7 @@ int main() {
                 break;
             case 3:
                 cout << "\n\t\t~Health Information~\n";
+                //If health info is already set it allows for changing it or leaving them as is
                 if (healthInfo) {
                     cout << "Health information already entered!\nDo you want to change the information? (Y/N)\n";
                     cin >> input;
@@ -161,7 +164,7 @@ int main() {
                     input = "Y";
                 }
                 if (input == "Y") {
-                    cout << "Are you a man or woman?\n";
+                    cout << "Are you a man or woman? (enter man or woman)\n";
                     cin >> input;
                     if (input == "man") {
                         male = true;
