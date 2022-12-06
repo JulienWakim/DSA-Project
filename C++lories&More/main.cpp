@@ -15,6 +15,13 @@ double calculateAMR(bool man, double weight, double height, int age, int activit
 int main() {
     //READS IN DATA FROM DATASET
     ifstream myfile ("nndb_flat.csv");
+    if (myfile.is_open()){
+        cout << "file open" << endl;
+    }
+    else{
+        cout << "file not open" << endl;
+    }
+
     string line, word;
     getline(myfile, line); //HEADER LINE
 
@@ -37,11 +44,11 @@ int main() {
         double cal = stod(calories);
         test[description] = cal;
         unordered.insert(description, cal);
-        ordered.insertKeyValue(description,cal);
-    }
+        ordered.insert(description,cal);
 
-    cout << ordered["Cheese, cottage, lowfat, 1% milkfat"] << endl;
-    cout << ordered["Cheese, cottage, lowfat, 1% milkfat"] << endl;
+    }
+    cout << "mollusks, snail, raw: " << ordered.findValue("mollusks, snail, raw") << endl;
+    cout << "millet, puffed: " << ordered.findValue("millet, puffed") << endl;
 
 
     bool prepped = false;

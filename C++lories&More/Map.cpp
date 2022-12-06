@@ -18,38 +18,15 @@ Map::Map() {
     size = 0;
 }
 
-void Map::insertKeyValue(string key, int value) {
-    Node* element = newMapElement(key,value);
-    if (root == nullptr){
-        root ->description = key;
-        root -> calories = value;
-        root ->left = nullptr;
-        root ->right = nullptr;
-        size++;
+void Map::insert(string key, int value) {
+    Node *element = newMapElement(key, value);
+    if (root == nullptr) {
+        root = element;
+        return;
     }
-    Node* current = root;
+    Node *current = root;
 
-    if (element -> description > current -> description){
-        if (current -> right != nullptr) {
-            insertKeyValueHelper(current, element);
-        }
-        else {
-            current -> right = element;
-        }
-    }
-    else if (element -> description < current -> description){
-        if (current -> left != nullptr) {
-            insertKeyValueHelper(current, element);
-        }
-        else {
-            current -> left = element;
-        }
-    }
-    else if (element -> description == current -> description){
-        cout << element -> description << " with " << element -> calories << " calories already in map" << endl;
-    }
-
-
+    insertKeyValueHelper(current, element);
 }
 
 Map::Node *Map::newMapElement(string key, int value) {
@@ -65,7 +42,7 @@ Map::Node *Map::newMapElement(string key, int value) {
 void Map::insertKeyValueHelper(Node* current,Node* element) {
     if (element -> description > current -> description){
         if (current -> right != nullptr) {
-            insertKeyValueHelper(current, element);
+            insertKeyValueHelper(current->right, element);
         }
         else {
             current -> right = element;
@@ -73,7 +50,7 @@ void Map::insertKeyValueHelper(Node* current,Node* element) {
     }
     else if (element -> description < current -> description){
         if (current -> left != nullptr) {
-            insertKeyValueHelper(current, element);
+            insertKeyValueHelper(current->left, element);
         }
         else {
             current -> left = element;
@@ -92,50 +69,26 @@ bool Map::isEmpty() {
 }
 
 double Map::findHelper(string key, Node* current) {
-    double value = -1;
-    if (key < current -> description){
-        if (current ->left != nullptr){
-            value = findHelper(key,current->left);
+    double value = -1.0;
+    while (current != nullptr){
+        if (key == current -> description){
+            value = current ->calories;
+            break;
         }
-        else{
-            throw "Key Does Not Exist";
+        else if (key < current -> description){
+            current = current -> left;
         }
-    }
-    else if (key > current -> description){
-        if (current ->right != nullptr){
-            value = findHelper(key,current->right);
-        }
-        else{
-            throw "Key Does Not Exist";
+        else if (key > current -> description){
+            current = current -> right;
         }
     }
-    else if (key == current -> description){
-        value = current -> calories;
+    if (value == -1.0) {
+        cout << "Key Does Not Exist" << endl;
     }
     return value;
 }
 
-double &Map::operator[](string key) {
+double Map::findValue(string key) {
     Node* current = root;
-    double value = -1;
-    if (key < current -> description){
-        if (current ->left != nullptr){
-            value = findHelper(key,current->left);
-        }
-        else{
-            throw "Key Does Not Exist";
-        }
-    }
-    else if (key > current -> description){
-        if (current ->right != nullptr){
-            value = findHelper(key,current->right);
-        }
-        else{
-            throw "Key Does Not Exist";
-        }
-    }
-    else if (key == current -> description){
-        value = current -> calories;
-    }
-    return value;
+    return findHelper(key,current);
 }

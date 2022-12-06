@@ -22,7 +22,7 @@ public : struct Node{
         Node *left;
         Node *right;
         string description;
-        int calories;
+        double calories;
     };
 private:
     int size;
@@ -31,10 +31,10 @@ private:
 public:
     Map();
     Map(string key, int value);
-    void insertKeyValue(string key, int value);
+    void insert(string key, int value);
     Node* newMapElement(string key, int value);
     void insertKeyValueHelper(Node* current,Node* element);
-    double &operator[](string key);
+    double findValue(string key);
     double findHelper(string key, Node* current);
     bool isEmpty();
 };
