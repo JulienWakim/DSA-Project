@@ -163,21 +163,20 @@ int main() {
                             "Are you sure you want to continue? (Y/N)\n";
                     cin >> input;
                     if(input == "Y"){
-
+                        maxCalories = calculateAMR(male, weight, height, age, activityLevel);
+                        if(lose){
+                            maxCalories-= 350;
+                        }
+                        else{
+                            maxCalories+= 350;
+                        }
+                        
                     }
                     else{
                         cout << "\n";
                     }
                 }
-
-
-                maxCalories = calculateAMR(male, weight, height, age, activityLevel);
-                if(lose){
-                    maxCalories-= 350;
-                }
-                else{
-                    maxCalories+= 350;
-                }
+                prepped = true;
                 break;
             case 5:
                 prepped = true;
