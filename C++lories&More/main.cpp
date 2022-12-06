@@ -217,9 +217,9 @@ int main() {
                     lunchCals = maxCalories * .4;
                     dinnerCals = maxCalories * .4;
 
-                    for(int i = 0; i < 7; i++){
+                    for (int i = 0; i < 7; i++) {
                         double cal = 0;
-                        switch(i){
+                        switch(i) {
                             case 0:
                                 cout << "\t\t\t~Monday~\n";
                                 break;
@@ -270,8 +270,7 @@ string checkForQuotes(istringstream& stream, string word){
         stream >> quoted(word);
         string discard;
         getline(stream, discard, ',');
-    }
-    else {
+    } else {
         getline(stream, word, ',');
     }
     return word;
@@ -291,11 +290,10 @@ double calculateAMR(bool man, double weight, double height, int age, int activit
     weight = weight / 2.2;
     height = height * 2.54;
     double BMR, AMR;
-    if(man){
+    if (man) {
         BMR = 66.47 + (13.75 * weight) + (5.003 * height) - (6.755 * age);
-    }
-    else{
-        BMR = 655.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
+    } else {
+        BMR = 65.1 + (9.563 * weight) + (1.850 * height) - (4.676 * age);
     }
     switch (activityLevel) {
         case 1:
@@ -319,23 +317,23 @@ double calculateAMR(bool man, double weight, double height, int age, int activit
 
 double curatePlanUnordered(double maxCals, vector<string>& restrictions, vector<vector<string>>& mealDatabase, UnorderedMap& unorderedNutrition){
     double calories;
-    for(int j = 0; j < mealDatabase.size(); j++){
+    for (int j = 0; j < mealDatabase.size(); j++) {
         bool valid = true;
         calories = 0;
-        for(int i = 1; i < mealDatabase[j].size(); i++){
+        for (int i = 1; i < mealDatabase[j].size(); i++) {
             //Check to see if meal has a dietary restriction in it
-            for(string restrict: restrictions){
-                if(mealDatabase[j][i].find(restrict) != -1){
+            for (string restrict: restrictions) {
+                if (mealDatabase[j][i].find(restrict) != -1) {
                     valid = false;
                 }
             }
             //Calculate calorie count of ingredients
             calories += unorderedNutrition[mealDatabase[j][i]];
         }
-        if(calories > maxCals){
+        if (calories > maxCals) {
             valid = false;
         }
-        if(valid){
+        if (valid) {
             cout << left << setw(30) << mealDatabase[j][0] << right << setw(30) << "Calories: " << calories;
             mealDatabase.erase(mealDatabase.begin()+j);
             break;
