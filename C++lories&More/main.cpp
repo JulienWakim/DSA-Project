@@ -50,6 +50,7 @@ int main() {
     bool activity = false;
     bool healthInfo = false;
     vector<string> dietaryRestrict;
+
     vector<vector<string>> breakfastMeals = { {"Cloud Eggs", "Eggs, scrambled, frozen mixture", "Cheese, parmesan, grated", "Basil, fresh", "Tomatoes, red, ripe, cooked, with salt"},
     {"Ham and Swiss Omlet", "Cheese, swiss", "OSCAR MAYER, Ham (water added, baked cooked 96% fat free)", "Eggs, scrambled, frozen mixture", "Butter, salted"},
     {"Fruity Waffle Parfait", "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat", "Nuts, almond butter, plain, without salt added", "Yogurt, fruit variety, nonfat, fortified with vitamin D", "Snacks, banana chips", "Syrup, maple, Canadian"},
@@ -59,7 +60,15 @@ int main() {
     {"Sausage Omlet", "Eggs, scrambled, frozen mixture", "Sausage, Italian, pork, raw", "Dip, TOSTITOS, salsa con queso, medium"},
     {"Sausage Hashbrowns", "Oil, corn and canola", "Sausage, Italian, pork, raw", "Potatoes, canned, drained solids, no salt added", "Cheese, pasteurized process, cheddar or American, low sodium"} };
 
-    vector<vector<string>> lunchMeals = {{},{}};
+    vector<vector<string>> lunchMeals = {{"McDonald's McChicken", "McDONALD'S, McCHICKEN Sandwich", "McDONALD'S, Sweet 'N Sour Sauce"},
+    {"McDonald's Chicken Nuggets", "McDONALD'S, Chicken McNUGGETS", "McDONALD'S, Barbeque Sauce"},
+    {"Quick Lunch Meal", "CAMPBELL'S CHUNKY Microwavable Bowls, Old Fashioned Vegetable Beef Soup, ready-to-serve"},
+    {"Quick Microwave Meal", "CAMPBELL'S CHUNKY Microwavable Bowls, Sirloin Burger with Country Vegetables Soup, ready-to-serve"},
+    {"Avocado Toast", "Bread, Multi-Grain, toasted (includes whole-grain)", "Eggs, scrambled, frozen mixture", "Avocados, raw, California"},
+    {"Mediterranean pasta", "Pasta, corn, dry", "Fish, salmon, coho (silver), raw (Alaska Native)", "Capers, canned"},
+    {"Simple salmon quinoa", "Quinoa, uncooked", "Fish, salmon, coho (silver), raw (Alaska Native)", "Tomatoes, red, ripe, cooked, with salt"},
+    {"Mini Healthy Pizza", "Cheese, ricotta, whole milk", "English muffins, plain, enriched, with ca prop (includes sourdough)", "Tomatoes, red, ripe, cooked, with salt"}};
+
     vector<vector<string>> dinnerMeals = {{},{}};
     //Initializing health factors for default meal prep
     int activityLevel = 3;
