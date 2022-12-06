@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include <map> //FOR TESTING
 #include "Map.h"
 #include "UnorderedMap.h"
 using namespace std;
@@ -11,21 +10,16 @@ using namespace std;
 string checkForQuotes(istringstream& stream, string word);
 void toVector(string line, vector<string>& list);
 double calculateAMR(bool man, double weight, double height, int age, int activityLevel);
+double curatePlanUnordered(double maxCals, vector<string>& restrictions, vector<vector<string>>& mealDatabase, UnorderedMap& unorderedNutrition);
+double curatePlanOrdered(double maxCals, vector<string>& restrictions, vector<vector<string>>& mealDatabase, Map& orderedNutrition);
 
 int main() {
     //READS IN DATA FROM DATASET
     ifstream myfile ("nndb_flat.csv");
-    if (myfile.is_open()){
-        cout << "file open" << endl;
-    }
-    else{
-        cout << "file not open" << endl;
-    }
 
     string line, word;
     getline(myfile, line); //HEADER LINE
 
-    map<string, double> test; //FOR TESTING PURPOSES
     UnorderedMap unordered;
     Map ordered;
 
@@ -42,46 +36,42 @@ int main() {
         checkForQuotes(stream, word); //SCIENTIFIC NAME
         string calories = checkForQuotes(stream, word); //CALORIES (FOR 100 GRAMS)
         double cal = stod(calories);
-        test[description] = cal;
         unordered.insert(description, cal);
         ordered.insert(description,cal);
 
     }
-    cout << "mollusks, snail, raw: " << ordered.findValue("mollusks, snail, raw") << endl;
-    cout << "millet, puffed: " << ordered.findValue("millet, puffed") << endl;
-
 
     bool prepped = false;
     bool restrict = false;
     bool activity = false;
     bool healthInfo = false;
     vector<string> dietaryRestrict;
-    vector<vector<string>> breakfastMeals = { {"Cloud Eggs", "Eggs, scrambled, frozen mixture", "Cheese, parmesan, grated", "Basil, fresh", "Tomatoes, red, ripe, cooked, with salt"},
-    {"Ham and Swiss Omlet", "Cheese, swiss", "OSCAR MAYER, Ham (water added, baked cooked 96% fat free)", "Eggs, scrambled, frozen mixture", "Butter, salted"},
-    {"Fruity Waffle Parfait", "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat", "Nuts, almond butter, plain, without salt added", "Yogurt, fruit variety, nonfat, fortified with vitamin D", "Snacks, banana chips", "Syrup, maple, Canadian"},
-    {"Waffle Sandwich", "Eggs, scrambled, frozen mixture", "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat", "Canadian bacon, unprepared", "Cheese, parmesan, grated", "Syrup, maple, Canadian"},
-    {"Applesauce Pancakes", "Pancakes, plain, dry mix, complete (includes buttermilk)", "Babyfood, fruit, applesauce, strained", "Syrup, maple, Canadian"},
-    {"Yogurt Fruit Cup", "Tangerines, (mandarin oranges), raw", "Nuts, almond butter, plain, without salt added", "Yogurt, fruit variety, nonfat, fortified with vitamin D"},
-    {"Sausage Omlet", "Eggs, scrambled, frozen mixture", "Sausage, Italian, pork, raw", "Dip, TOSTITOS, salsa con queso, medium"},
-    {"Sausage Hashbrowns", "Oil, corn and canola", "Sausage, Italian, pork, raw", "Potatoes, canned, drained solids, no salt added", "Cheese, pasteurized process, cheddar or American, low sodium"} };
+    vector<vector<string>> breakfastMeals = {{"Cloud Eggs", "eggs, scrambled, frozen mixture", "cheese, parmesan, grated", "basil, fresh", "tomatoes, red, ripe, cooked, with salt"},
+    {"Ham and Swiss Omelet", "cheese, swiss", "oscar mayer, ham (water added, baked cooked 96% fat free)", "eggs, scrambled, frozen mixture", "butter, salted"},
+    {"Fruity Waffle Parfait", "kellogg's, eggo, nutri-grain, waffles, low fat", "nuts, almond butter, plain, without salt added", "yogurt, fruit variety, nonfat, fortified with vitamin d", "snacks, banana chips", "syrup, maple, canadian"},
+    {"Waffle Egg Sandwich", "eggs, scrambled, frozen mixture", "kellogg's, eggo, nutri-grain, waffles, low fat", "canadian bacon, unprepared", "cheese, parmesan, grated", "syrup, maple, canadian"},
+    {"Applesauce Pancakes", "pancakes, plain, dry mix, complete (includes buttermilk)", "babyfood, fruit, applesauce, strained", "syrup, maple, canadian"},
+    {"Yogurt Fruit Cup", "tangerines, (mandarin oranges), raw", "nuts, almond butter, plain, without salt added", "yogurt, fruit variety, nonfat, fortified with vitamin d"},
+    {"Sausage Omelet", "eggs, scrambled, frozen mixture", "sausage, italian, pork, raw", "dip, tostitos, salsa con queso, medium"},
+    {"Sausage Hash-browns", "oil, corn and canola", "sausage, italian, pork, raw", "potatoes, canned, drained solids, no salt added", "cheese, pasteurized process, cheddar or american, low sodium"} };
 
-    vector<vector<string>> lunchMeals = {{"McDonald's McChicken", "McDONALD'S, McCHICKEN Sandwich", "McDONALD'S, Sweet 'N Sour Sauce"},
-    {"McDonald's Chicken Nuggets", "McDONALD'S, Chicken McNUGGETS", "McDONALD'S, Barbeque Sauce"},
-    {"Quick Lunch Meal", "CAMPBELL'S CHUNKY Microwavable Bowls, Old Fashioned Vegetable Beef Soup, ready-to-serve"},
-    {"Quick Microwave Meal", "CAMPBELL'S CHUNKY Microwavable Bowls, Sirloin Burger with Country Vegetables Soup, ready-to-serve"},
-    {"Avocado Toast", "Bread, Multi-Grain, toasted (includes whole-grain)", "Eggs, scrambled, frozen mixture", "Avocados, raw, California"},
-    {"Mediterranean pasta", "Pasta, corn, dry", "Fish, salmon, coho (silver), raw (Alaska Native)", "Capers, canned"},
-    {"Simple salmon quinoa", "Quinoa, uncooked", "Fish, salmon, coho (silver), raw (Alaska Native)", "Tomatoes, red, ripe, cooked, with salt"},
-    {"Mini Healthy Pizza", "Cheese, ricotta, whole milk", "English muffins, plain, enriched, with ca prop (includes sourdough)", "Tomatoes, red, ripe, cooked, with salt"}};
+    vector<vector<string>> lunchMeals = {{"McDonald's McChicken", "mcdonald's, mcchicken sandwich", "mcdonald's, sweet 'n sour sauce"},
+    {"McDonald's Chicken Nuggets", "mcdonald's, chicken mcnuggets", "mcdonald's, barbeque sauce"},
+    {"Quick Lunch Meal", "campbell's chunky microwavable bowls, old fashioned vegetable beef soup, ready-to-serve"},
+    {"Quick Microwave Meal", "campbell's chunky microwavable bowls, sirloin burger with country vegetables soup, ready-to-serve"},
+    {"Avocado Toast with Eggs", "bread, multi-grain, toasted (includes whole-grain)", "eggs, scrambled, frozen mixture", "avocados, raw, california"},
+    {"Mediterranean pasta", "pasta, corn, dry", "fish, salmon, coho (silver), raw (alaska native)", "capers, canned"},
+    {"Simple salmon quinoa", "quinoa, uncooked", "fish, salmon, coho (silver), raw (alaska Native)", "tomatoes, red, ripe, cooked, with salt"},
+    {"Mini Healthy Pizza", "cheese, ricotta, whole milk", "english muffins, plain, enriched, with ca prop (includes sourdough)", "tomatoes, red, ripe, cooked, with salt"}};
 
-    vector<vector<string>> dinnerMeals = {{"Chicken and Veggies", "Vegetables, mixed (corn, lima beans, peas, green beans, carrots) canned, no salt added", "Tomatoes, red, ripe, cooked, with salt", "Chicken, broilers or fryers, thigh, meat and skin, raw"},
-    {"Pasta with Parmesan", "Sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "Cheese, parmesan, grated"},
-    {"Spaghetti Carbonara", "Sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "Cheese, parmesan, grated", "Eggs, scrambled, frozen mixture"},
-    {"Chicken and Fruit Salad", "Chicken breast tenders, breaded, cooked, microwaved", "Fruit salad, (peach and pear and apricot and pineapple and cherry), canned, water pack, solids and liquids"},
-    {"Colorful Pasta Salad", "Arugula, raw", "Pasta, fresh-refrigerated, plain, cooked", "PREGO Pasta, Heart Smart- Roasted Red Pepper and Garlic Italian Sauce, ready-to-serve"},
-    {"Balsamic Glazed Salmon", "Fish, salmon, coho (silver), raw (Alaska Native)", "Vinegar, balsamic"},
-    {"Marinara Chicken Pasta", "Chicken breast tenders, breaded, cooked, microwaved", "Sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium"},
-    {"Breakfast for Dinner", "Pork, cured, bacon, cooked, microwaved", "Eggs, scrambled, frozen mixture", "KELLOGG'S, EGGO, NUTRI-GRAIN, Waffles, Low Fat"}};
+    vector<vector<string>> dinnerMeals = {{"Chicken and Veggies", "vegetables, mixed (corn, lima beans, peas, green beans, carrots) canned, no salt added", "tomatoes, red, ripe, cooked, with salt", "chicken, broilers or fryers, thigh, meat and skin, raw"},
+    {"Pasta with Parmesan", "sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "cheese, parmesan, grated"},
+    {"Spaghetti Carbonara", "sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium", "cheese, parmesan, grated", "eggs, scrambled, frozen mixture"},
+    {"Chicken and Fruit Salad", "chicken breast tenders, breaded, cooked, microwaved", "fruit salad, (peach and pear and apricot and pineapple and cherry), canned, water pack, solids and liquids"},
+    {"Colorful Pasta Salad", "arugula, raw", "pasta, fresh-refrigerated, plain, cooked", "prego pasta, heart smart- roasted red pepper and garlic italian sauce, ready-to-serve"},
+    {"Balsamic Glazed Salmon", "fish, salmon, coho (silver), raw (alaska native)", "vinegar, balsamic"},
+    {"Marinara Chicken Pasta", "chicken breast tenders, breaded, cooked, microwaved", "sauce, pasta, spaghetti/marinara, ready-to-serve, low sodium"},
+    {"Breakfast for Dinner", "pork, cured, bacon, cooked, microwaved", "eggs, scrambled, frozen mixture", "kellogg's, eggOo, nutri-grain, waffles, low fat"}};
     
     //Initializing health factors for default meal prep
     int activityLevel = 3;
@@ -109,17 +99,16 @@ int main() {
         cin >> option;
 
         string input;
-        switch(option){
+        switch(option) {
             case 1:
                 cout << "\n\t\t~Dietary Restrictions~\n";
-                if(restrict){
+                if (restrict) {
                     cout << "Dietary restrictions already entered!\nDo you want to change the information? (Y/N)\n";
                     cin >> input;
-                }
-                else{
+                } else {
                     input = "Y";
                 }
-                if(input == "Y") {
+                if (input == "Y") {
                     dietaryRestrict.clear();
                     cout << "Do you have any dietary restrictions? (Y/N)\n";
                     cin >> input;
@@ -133,40 +122,36 @@ int main() {
                         cout << "Adding information to algorithm...\n\n";
                     }
                     restrict = true;
-                }
-                else{
+                } else {
                     cout << "\n";
                 }
                 break;
             case 2:
                 cout << "\n\t\t~Activity Level~\n";
-                if(activity){
+                if (activity) {
                     cout << "Activity level already entered!\nDo you want to change the information? (Y/N)\n";
                     cin >> input;
-                }
-                else{
+                } else {
                     input = "Y";
                 }
-                if(input == "Y") {
+                if (input == "Y") {
                     cout << "On a scale of 1-5, how active are you? \n(1 being not active and 5 being very active)\n";
                     cin >> activityLevel;
                     cout << "Adding information to algorithm...\n\n";
                     activity = true;
-                }
-                else{
+                } else {
                     cout << "\n";
                 }
                 break;
             case 3:
                 cout << "\n\t\t~Health Information~\n";
-                if(healthInfo){
+                if (healthInfo) {
                     cout << "Health information already entered!\nDo you want to change the information? (Y/N)\n";
                     cin >> input;
-                }
-                else{
+                } else {
                     input = "Y";
                 }
-                if(input == "Y") {
+                if (input == "Y") {
                     cout << "Are you a man or woman?\n";
                     cin >> input;
                     if (input == "man") {
@@ -193,35 +178,70 @@ int main() {
 
                     cout << "Adding information to algorithm...\n\n";
                     healthInfo = true;
-                }
-                else{
+                } else {
                     cout << "\n";
                 }
                 break;
             case 4:
                 cout << "\n\t\t~Meal Plan~\n";
-                if(!restrict || !activity || !healthInfo){
+                if (!restrict || !activity || !healthInfo) {
                     cout << "You have not inputted all your information!\n"
                             "It is suggested to have all fields filled out in order to produce the best personal meal plan!\n"
                             "Are you sure you want to continue? (Y/N)\n";
                     cin >> input;
-                    if(input == "Y"){
-                        maxCalories = calculateAMR(male, weight, height, age, activityLevel);
-                        if(lose){
-                            maxCalories-= 350;
-                        }
-                        else{
-                            maxCalories+= 350;
-                        }
-                        bfastCals = maxCalories * .2;
-                        lunchCals = maxCalories * .4;
-                        dinnerCals = maxCalories * .4;
+                } else {
+                    input = "Y";
+                }
+                if (input == "Y") {
+                    maxCalories = calculateAMR(male, weight, height, age, activityLevel);
+                    if (lose) {
+                        maxCalories -= 500;
+                        cout << "\nIn order to lose weight, you should eat around " << maxCalories << " calories a day!\n";
+                    } else {
+                        maxCalories += 500;
+                        cout << "\nIn order to gain weight, you should eat around " << maxCalories << " calories a day!\n";
+                    }
+                    bfastCals = maxCalories * .2;
+                    lunchCals = maxCalories * .4;
+                    dinnerCals = maxCalories * .4;
 
+                    for(int i = 0; i < 7; i++){
+                        double cal = 0;
+                        switch(i){
+                            case 0:
+                                cout << "\t\t\t~Monday~\n";
+                                break;
+                            case 1:
+                                cout << "\n\n\t\t\t~Tuesday~\n";
+                                break;
+                            case 2:
+                                cout << "\n\n\t\t\t~Wednesday~\n";
+                                break;
+                            case 3:
+                                cout << "\n\n\t\t\t~Thursday~\n";
+                                break;
+                            case 4:
+                                cout << "\n\n\t\t\t~Friday~\n";
+                                break;
+                            case 5:
+                                cout << "\n\n\t\t\t~Saturday~\n";
+                                break;
+                            case 6:
+                                cout << "\n\n\t\t\t~Sunday~\n";
+                                break;
+                        }
+                        cout << "Breakfast: \t";
+                        cal = curatePlanUnordered(bfastCals, dietaryRestrict, breakfastMeals, unordered);
+                        cout << "\nLunch: \t\t";
+                        cal += curatePlanUnordered(lunchCals, dietaryRestrict, lunchMeals, unordered);
+                        cout << "\nDinner: \t";
+                        cal += curatePlanUnordered(dinnerCals, dietaryRestrict, dinnerMeals, unordered);
+                        cout << "\nTotal Calories for the Day: " << cal;
                     }
-                    else{
-                        cout << "\n";
-                    }
+
                     prepped = true;
+                } else {
+                    cout << "\n";
                 }
 
                 break;
@@ -284,3 +304,31 @@ double calculateAMR(bool man, double weight, double height, int age, int activit
     }
     return AMR;
 }
+
+double curatePlanUnordered(double maxCals, vector<string>& restrictions, vector<vector<string>>& mealDatabase, UnorderedMap& unorderedNutrition){
+    double calories;
+    for(int j = 0; j < mealDatabase.size(); j++){
+        bool valid = true;
+        calories = 0;
+        for(int i = 1; i < mealDatabase[j].size(); i++){
+            //Check to see if meal has a dietary restriction in it
+            for(string restrict: restrictions){
+                if(mealDatabase[j][i].find(restrict) != -1){
+                    valid = false;
+                }
+            }
+            //Calculate calorie count of ingredients
+            calories += unorderedNutrition[mealDatabase[j][i]];
+        }
+        if(calories > maxCals){
+            valid = false;
+        }
+        if(valid){
+            cout << left << setw(30) << mealDatabase[j][0] << right << setw(30) << "Calories: " << calories;
+            mealDatabase.erase(mealDatabase.begin()+j);
+            break;
+        }
+    }
+    return calories;
+}
+

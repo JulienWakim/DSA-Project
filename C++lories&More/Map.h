@@ -33,8 +33,8 @@ private:
 public:
     Map();
     Map(string key, int value);
-    void insertKeyValue(string key, int value);
-    double &operator[](string key);
+    void insert(string key, int value);
+    double findValue(string key);
     bool isEmpty();
 };
 
