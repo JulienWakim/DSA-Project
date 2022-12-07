@@ -4,8 +4,8 @@
 UnorderedMap::UnorderedMap(){
     loadFactor = 0;
     numOfItems = 0;
-    bucketSize = 100;
-    bucket.resize(100);
+    bucketSize = 1000;
+    bucket.resize(1000);
 }
 
 void UnorderedMap::insert(string newKey, double newValue){
